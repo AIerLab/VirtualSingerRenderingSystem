@@ -1,1 +1,2 @@
-# AI-Machine-Song-Tuner
+# AI-Virtual-Singer-Rendering-System
+AI sound rendering system for Virtual Singers.
