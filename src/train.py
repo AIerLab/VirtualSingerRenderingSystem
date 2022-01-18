@@ -6,7 +6,6 @@ import pandas as pd
 
 from keras.layers.core import Dense, Activation, Dropout
 
-from keras.layers.recurrent import GRU, LSTM
 from keras.layers import CuDNNLSTM, CuDNNGRU
 
 from keras.models import Sequential, load_model

@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 
-class RNN(tf.keras.Model):
+class LSTM(tf.keras.Model):
     """
     use for sequential information
     """
