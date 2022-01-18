@@ -1,37 +1,39 @@
 import tensorflow as tf
+from keras.layers import CuDNNGRU
+from keras.layers.core import Dense, Activation, Dropout
+from keras.models import Sequential
+
+from setting import *
 
 
-class LSTM(tf.keras.Model):
+# TODO 修改模型进行优劣二分类
+class GRU2One():
     """
     use for sequential information
     """
 
-    def __init__(self, batch_size):
-        super().__init__()
-        self.batch_size = batch_size
-        self.cell_01 = tf.keras.layers.LSTMCell(units=256, name="LSTM_01")
-        self.cell_02 = tf.keras.layers.LSTMCell(units=128, name="LSTM_02")
-        self.dense_01 = tf.keras.layers.Dense(units=50, name="DENSE_01")
-        self.dense_02 = tf.keras.layers.Dense(units=1, name="DENSE_02")
-
-    def call(self, input):
-        state01 = self.cell_01.get_initial_state(batch_size=self.batch_size, dtype=tf.float32)
-        state02 = self.cell_02.get_initial_state(batch_size=self.batch_size, dtype=tf.float32)
-        x = 0
-        for value in input[1:]:
-            x = value
-            x, state01 = self.cell_01(x, state01)
-            x, state02 = self.cell_02(x, state02)
-        x = self.dense_01(x)
-        # output = tf.nn.softmax(x) # 测试分类方法使用
-        output = self.dense_02(x)
-        return output
+    def __init__(self):
+        # 定义模型
+        self.model = Sequential([
+            CuDNNGRU(units=128, return_sequences=True, name="layer_01", input_shape=(seq_length, 4)),
+            Dropout(0.2),
+            CuDNNGRU(units=64, return_sequences=False, name="layer_02"),
+            Dropout(0.2),
+            Dense(units=1, name="output"),
+            Activation("linear"),
+        ])
+        # 编译模型
+        self.model.compile(optimizer='adam', loss='mse', metrics=['mae', 'mape'])
 
 
-class NN(tf.keras.Model):
+class GRU2Many(tf.keras.Model):
     """
     use for discrete information
     """
 
     def __init__(self, batch_size):
         super().__init__()
+        pass
+
+    def call(self, input):
+        pass

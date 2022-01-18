@@ -131,4 +131,5 @@ dmypy.json
 model/
 asset/
 .idea/
+temp/
 
