@@ -49,7 +49,8 @@ if __name__ == '__main__':
         if rank > 1: # 大于1作为测试集
             continue
         for track in vsqx4.vsTrack:
-            notes = [[float(note.t), float(note.dur), float(note.n), float(note.v)] for part in track.vsPart
+            notes = [[float(note.t), float(note.dur), float(note.n), float(note.v)]
+                     for part in track.vsPart
                      for note in part.VNote]
 
             notes_df = pd.DataFrame(notes, columns=["t", "dur", "n", "v"])

@@ -29,7 +29,8 @@ if __name__ == '__main__':
         rank = rank / 100
         y.append(rank)
         for track in vsqx4.vsTrack:
-            notes = [[float(note.t), float(note.dur), float(note.n), float(note.v)] for part in track.vsPart
+            notes = [[float(note.t), float(note.dur), float(note.n), float(note.v)]
+                     for part in track.vsPart
                      for note in part.VNote]
 
             notes_df = pd.DataFrame(notes, columns=["t", "dur", "n", "v"])
